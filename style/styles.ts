@@ -90,6 +90,12 @@ export const styles = StyleSheet.create({
     color: '#4162B7',
     marginLeft: 5
   },
+  cupom:{
+    fontSize: fontSizes.small,
+    fontWeight: 'bold',
+    color: '#696969',
+    marginLeft: 5
+  },
   footerArea:{
     marginVertical: 30
   },
@@ -97,5 +103,15 @@ export const styles = StyleSheet.create({
     fontSize: fontSizes.small,
     color: '#999',
     fontWeight: '500'
+  },
+  signUpAreaCupom: {
+    flexDirection: 'row',
+    marginTop: 15
+  },
+  status:{
+    fontSize: fontSizes.small,
+    fontWeight: 'bold',
+    color: '#696969',
+    marginTop: 20
   }
 });

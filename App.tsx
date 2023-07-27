@@ -6,11 +6,39 @@ const  App = () => {
 
   const [emailField, setEmailField] = useState<string>('');
   const [passwordField, setPasswordFiled] = useState<string>('');
+  
+  const [status, setStatus] = useState<string>('');
+  const [showCupom, setShowCupom] = useState(false);
 
   const handleLoginButton = () => {
     alert(emailField);
     alert(passwordField);
   };
+
+  const handleVerifyLogin = async () => {
+    setStatus('');
+    setShowCupom(false);
+
+    const req = await fetch('https://api.b7web.com.br/loginsimples/', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: emailField,
+        password: passwordField
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const json = await req.json();
+
+    if(json.status == 'ok'){
+      setStatus('Acesso LIBERADO!');
+      setShowCupom(true);
+    } else {
+      setStatus('Acesso NEGADO!');
+      setShowCupom(false);
+    }
+  }
 
   const handleForgetButton = () => {};
   const handleSingUpButton = () => {};
@@ -42,9 +70,18 @@ const  App = () => {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity onPress={handleLoginButton} style={styles.button} >
+        <TouchableOpacity onPress={handleVerifyLogin} style={styles.button} >
             <Text style={styles.buttonText}>Entrar</Text>
         </TouchableOpacity>
+
+        <Text style={styles.status}>{status}</Text>
+
+        {showCupom && 
+          <View style={styles.signUpAreaCupom}>
+            <Text style={styles.signUpText}>Código de cupom:</Text>
+            <Text style={styles.cupom}>JHXSDE</Text>
+          </View>
+        }
 
         <View style={styles.signUpArea}>
           <Text style={styles.signUpText}>Não tem uma conta</Text>
